@@ -1,96 +1,43 @@
-import 'package:app_bjumper_bak/src/domain/entities/userDTO.dart';
-import 'package:app_bjumper_bak/src/domain/repositories/github_repository.dart';
-import 'package:app_bjumper_bak/src/domain/usescases/get_user_and_repos.dart';
+import 'package:app_bjumper_bak/src/presentation/features/home/controller/home_view_model.dart';
+import 'package:app_bjumper_bak/src/presentation/features/home/widget/error_message.dart';
+import 'package:app_bjumper_bak/src/presentation/features/home/widget/repositories_list.dart';
+import 'package:app_bjumper_bak/src/presentation/features/home/widget/user_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:app_bjumper_bak/src/presentation/features/home/widget/search_field.dart';
 
-import 'package:app_bjumper_bak/src/domain/entities/repositoryDTO.dart';
-
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, required this.repository});
-  final GitHubRepository repository;
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final _controller = TextEditingController();
-  late final GetUserAndRepos _getUserAndRepos;
-  UserDTO? _user;
-  List<RepositoryDTO>? _repositories;
-  String? _errorMessage;
+class HomeScreen extends ConsumerWidget {
+  final TextEditingController _controller = TextEditingController();
+static const String routeName = 'home';
+  HomeScreen({super.key});
 
   @override
-  void initState() {
-    super.initState();
-    _getUserAndRepos = GetUserAndRepos(widget.repository);
-  }
+  Widget build(BuildContext context, ref) {
+    final state = ref.watch(homeViewModelProvider);
 
-  Future<void> _searchUser() async {
-    final username = _controller.text.trim();
-    if (username.isEmpty) return;
-
-    try {
-      final result = await _getUserAndRepos.call(username);
-      setState(() {
-        _user = result['user'] as UserDTO;
-        _repositories = result['repositories'] as List<RepositoryDTO>;
-        _errorMessage = null;
-      });
-    } catch (e) {
-      setState(() {
-        _user = null;
-        _repositories = null;
-        _errorMessage = 'User not found or an error occurred.';
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('GitHub User Search')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
+            SearchField(
               controller: _controller,
-              decoration: InputDecoration(
-                labelText: 'GitHub Username',
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.search),
-                  onPressed: _searchUser,
-                ),
-              ),
+              onSearch: () {
+                ref
+                    .read(homeViewModelProvider.notifier)
+                    .searchUser(_controller.text);
+              },
             ),
             const SizedBox(height: 20),
-            if (_errorMessage != null)
-              Text(_errorMessage!, style: const TextStyle(color: Colors.red)),
-            if (_user != null) ...[
-              CircleAvatar(
-                backgroundImage: NetworkImage(_user!.avatarUrl),
-                radius: 40,
-              ),
-              Text(_user!.username, style: const TextStyle(fontSize: 24)),
-              Text(_user!.fullName ?? ''),
-              Text('Followers: ${_user!.followers}'),
-              Text(_user!.bio ?? 'No bio available'),
+            if (state.errorMessage != null)
+              ErrorMessage(message: state.errorMessage!),
+            if (state.user != null) ...[
+              UserProfile(user: state.user!),
               const SizedBox(height: 20),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: _repositories?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    final repo = _repositories![index];
-                    return ListTile(
-                      title: Text(repo.name),
-                      subtitle: Text('Forks: ${repo.forks}, Stars: ${repo.stars}'),
-                    );
-                  },
-                ),
-              ),
+              if (state.repositories != null)
+                RepositoriesList(repositories: state.repositories!),
             ],
           ],
         ),

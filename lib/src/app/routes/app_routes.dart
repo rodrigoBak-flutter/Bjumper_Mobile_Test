@@ -1,5 +1,6 @@
-import 'package:app_bjumper_bak/src/presentation/features/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:app_bjumper_bak/src/presentation/features/splash_screen/splash_screen.dart';
+import 'package:app_bjumper_bak/src/presentation/features/home/home_screen.dart';
 
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -9,9 +10,11 @@ class RouterGenerator {
     switch (name) {
       case SplashScreen.routeName:
         return _getRoute(page: const SplashScreen());
+      case SplashScreen.routeName:
+        return _getRoute(page: HomeScreen());
 
       default:
-        return _getRoute(page: const SplashScreen());
+        return _getRoute(page: HomeScreen());
     }
   }
 
