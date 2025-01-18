@@ -1,3 +1,4 @@
+import 'package:app_bjumper_bak/src/presentation/features/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -11,8 +12,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Bjumper test',
       theme: ThemeData.light(useMaterial3: true),
-      initialRoute: '',
+      initialRoute: '/',
       routes: {
+        '/': (_) => const SplashScreen()
         // '/': (_) => const HomeScreen(),
       },
     );
