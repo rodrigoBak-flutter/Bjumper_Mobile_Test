@@ -1,6 +1,6 @@
 import 'package:app_bjumper_bak/src/core/mixins/network_mixin.dart';
 import 'package:app_bjumper_bak/src/data/models/repository_model.dart';
-import 'package:app_bjumper_bak/src/data/models/usersDTO_model.dart';
+import 'package:app_bjumper_bak/src/data/models/users_model.dart';
 import 'dart:convert';
 
 class GitHubRemoteDataSource with NetworkMixin {
