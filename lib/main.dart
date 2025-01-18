@@ -12,11 +12,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Bjumper test',
       theme: ThemeData.light(useMaterial3: true),
-      initialRoute: '/',
-      routes: {
-        '/': (_) => const SplashScreen()
-        // '/': (_) => const HomeScreen(),
-      },
+      initialRoute: SplashScreen.routeName,
     );
   }
 }
