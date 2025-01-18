@@ -9,15 +9,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
-      ),
+      title: 'Bjumper test',
+      theme: ThemeData.light(useMaterial3: true),
+      initialRoute: '',
+      routes: {
+        // '/': (_) => const HomeScreen(),
+      },
     );
   }
 }
