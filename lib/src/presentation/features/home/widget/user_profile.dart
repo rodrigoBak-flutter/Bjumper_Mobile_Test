@@ -1,4 +1,5 @@
 import 'package:app_bjumper_bak/src/core/extensions/context.dart';
+import 'package:app_bjumper_bak/src/presentation/style/bjumper_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:app_bjumper_bak/src/domain/entities/userDTO.dart';
 
@@ -22,19 +23,21 @@ class UserProfile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //TODO:FALTA AGREGAR COLORES
-              Text('@${user.username}', style: context.displaySmall.copyWith()),
+              Text('@${user.username}',
+                  style: context.displaySmall
+                      .copyWith(color: BjumperColors.primary)),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 child: Text(
                   user.fullName ?? 'No fullName availabl',
-                  style:
-                      context.titleLarge.copyWith(fontWeight: FontWeight.bold),
+                  style: context.titleLarge.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: BjumperColors.primary),
                 ),
               ),
               Text(
                 '${user.followers} followers',
-                style: context.bodyLarge.copyWith(),
+                style: context.bodyLarge.copyWith(color: BjumperColors.primary),
               ),
             ],
           ),

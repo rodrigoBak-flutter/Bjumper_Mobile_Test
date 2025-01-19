@@ -1,5 +1,6 @@
 import 'package:app_bjumper_bak/src/core/extensions/context.dart';
 import 'package:app_bjumper_bak/src/domain/entities/repositoryDTO.dart';
+import 'package:app_bjumper_bak/src/presentation/style/bjumper_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -28,7 +29,7 @@ class RepositoriesList extends StatelessWidget {
                 Text(
                   'Repo $index',
                   style:
-                      context.titleMedium.copyWith(fontWeight: FontWeight.bold),
+                      context.titleMedium.copyWith(fontWeight: FontWeight.bold,color: BjumperColors.primary),
                 ),
                 Row(
                   children: [
@@ -38,7 +39,8 @@ class RepositoriesList extends StatelessWidget {
                     ),
                     Text(
                       repo.forks.toString(),
-                      style: context.bodyMedium.copyWith(),
+                      style: context.bodyMedium
+                          .copyWith(color: BjumperColors.primary),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -46,7 +48,8 @@ class RepositoriesList extends StatelessWidget {
                     ),
                     Text(
                       repo.stars.toString(),
-                      style: context.bodyMedium.copyWith(),
+                      style: context.bodyMedium
+                          .copyWith(color: BjumperColors.primary),
                     )
                   ],
                 )
