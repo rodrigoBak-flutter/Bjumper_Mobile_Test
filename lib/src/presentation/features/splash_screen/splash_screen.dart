@@ -1,5 +1,6 @@
 import 'package:app_bjumper_bak/src/core/extensions/context.dart';
 import 'package:app_bjumper_bak/src/presentation/features/home/home_screen.dart';
+import 'package:app_bjumper_bak/src/presentation/style/bjumper_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -23,7 +24,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 212, 120, 235),
+      backgroundColor: BjumperColors.splashScreen,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +34,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
               'assets/icons/bjumperLogo.svg',
               fit: BoxFit.cover,
               alignment: AlignmentDirectional.center,
-              color: Colors.yellow,
             ),
           ),
         ],

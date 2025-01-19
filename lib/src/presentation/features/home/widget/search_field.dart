@@ -1,3 +1,4 @@
+import 'package:app_bjumper_bak/src/presentation/style/bjumper_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,24 +17,24 @@ class SearchField extends ConsumerWidget {
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
           labelText: '@Username',
+          labelStyle: const TextStyle(color: BjumperColors.primary),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(
-                12.0), // Ajusta el valor para mayor o menor curvatura
+            borderRadius: BorderRadius.circular(12.0),
             borderSide: const BorderSide(
-              color: Colors.grey, // Cambia el color del borde si es necesario
+              color: Colors.grey,
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12.0),
             borderSide: const BorderSide(
-              color: Colors.blue, // Color del borde al hacer foco
+              color: BjumperColors.primary,
               width: 2.0,
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12.0),
             borderSide: const BorderSide(
-              color: Colors.grey, // Color del borde por defecto
+              color: Colors.grey,
               width: 1.0,
             ),
           ),
