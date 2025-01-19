@@ -9,14 +9,14 @@ class HomeState {
   final UserDTO? user;
   final List<RepositoryDTO>? repositories;
   final String? errorMessage;
-  final bool isSearchMode;
+ 
   final bool isLoading;
 
   HomeState({
     this.user,
     this.repositories,
     this.errorMessage,
-    this.isSearchMode = true,
+   
     this.isLoading = false,
   });
 
@@ -31,7 +31,7 @@ class HomeState {
       user: user ?? this.user,
       repositories: repositories ?? this.repositories,
       errorMessage: errorMessage ?? this.errorMessage,
-      isSearchMode: isSearchMode ?? this.isSearchMode,
+      
       isLoading: isLoading ?? this.isLoading,
     );
   }
@@ -44,17 +44,14 @@ class HomeViewModel extends StateNotifier<HomeState> {
 
   Future<void> searchUser(String username) async {
     state = state.copyWith(isLoading: true);
-    if (username.isEmpty) {
-      clearSearch();
-      return;
-    }
+   
     try {
       final result = await getUserAndRepos(username);
       state = state.copyWith(
         user: result.user,
         repositories: result.repositories,
         errorMessage: null,
-        isSearchMode: false,
+       
         isLoading: false,
       );
     } catch (e) {
@@ -63,7 +60,7 @@ class HomeViewModel extends StateNotifier<HomeState> {
       }
       state = state.copyWith(
         errorMessage: 'Failed to fetch user and repositories',
-        isSearchMode: false,
+      
         isLoading: false,
       );
     }
