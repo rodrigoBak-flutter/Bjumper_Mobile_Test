@@ -28,14 +28,18 @@ class RepositoriesList extends StatelessWidget {
               children: [
                 Text(
                   'Repo $index',
-                  style:
-                      context.titleMedium.copyWith(fontWeight: FontWeight.bold,color: BjumperColors.primary),
+                  style: context.titleMedium.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: BjumperColors.primary),
                 ),
                 Row(
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: SvgPicture.asset('assets/icons/fork.svg'),
+                      child: SvgPicture.asset(
+                        'assets/icons/fork.svg',
+                        color: BjumperColors.primary,
+                      ),
                     ),
                     Text(
                       repo.forks.toString(),
@@ -44,7 +48,10 @@ class RepositoriesList extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: SvgPicture.asset('assets/icons/star.svg'),
+                      child: SvgPicture.asset(
+                        'assets/icons/star.svg',
+                        color: BjumperColors.primary,
+                      ),
                     ),
                     Text(
                       repo.stars.toString(),

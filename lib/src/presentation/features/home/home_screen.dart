@@ -21,20 +21,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _controller.addListener(() {
-      final text = _controller.text;
-      if (text.isEmpty) {
-        ref.read(homeViewModelProvider.notifier).clearSearch();
-      } else {
-        ref.read(homeViewModelProvider.notifier).searchUser(text);
-      }
-    });
   }
 
   @override
   void dispose() {
     super.dispose();
     _controller.dispose();
+  }
+
+  void _searchUser() {
+    final text = _controller.text;
+    if (text.isNotEmpty) {
+      ref.read(homeViewModelProvider.notifier).searchUser(text);
+    } else {
+      ref.read(homeViewModelProvider.notifier).clearSearch();
+    }
   }
 
   @override
@@ -56,9 +57,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 30,bottom: 5),
+              padding: const EdgeInsets.only(top: 30, bottom: 5),
               child: SearchField(
                 controller: _controller,
+                onSearch: _searchUser,
               ),
             ),
             if (state.isLoading)
