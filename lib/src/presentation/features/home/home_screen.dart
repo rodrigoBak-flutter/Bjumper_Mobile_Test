@@ -7,13 +7,38 @@ import 'package:app_bjumper_bak/src/presentation/features/home/widget/repositori
 import 'package:app_bjumper_bak/src/presentation/features/home/widget/user_profile.dart';
 import 'package:app_bjumper_bak/src/presentation/features/home/widget/search_field.dart';
 
-class HomeScreen extends ConsumerWidget {
-  final TextEditingController _controller = TextEditingController();
+class HomeScreen extends ConsumerStatefulWidget {
   static const String routeName = 'home';
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, ref) {
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() {
+      final text = _controller.text;
+      if (text.isEmpty) {
+        ref.read(homeViewModelProvider.notifier).clearSearch();
+      } else {
+        ref.read(homeViewModelProvider.notifier).searchUser(text);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(homeViewModelProvider);
 
     return Scaffold(
@@ -30,24 +55,17 @@ class HomeScreen extends ConsumerWidget {
                 alignment: AlignmentDirectional.center,
               ),
             ),
-            SearchField(
-              controller: _controller,
-              onSearch: () {
-                if (state.isSearchMode) {
-                  ref
-                      .read(homeViewModelProvider.notifier)
-                      .searchUser(_controller.text);
-                } else {
-                  _controller.clear();
-                  ref.read(homeViewModelProvider.notifier).clearSearch();
-                }
-              },
+            Padding(
+              padding: const EdgeInsets.only(top: 30,bottom: 5),
+              child: SearchField(
+                controller: _controller,
+              ),
             ),
-            const SizedBox(height: 20),
             if (state.isLoading)
               const Center(child: CircularProgressIndicator()),
             if (!state.isLoading && state.errorMessage != null)
-              ErrorMessage(message: state.errorMessage!),
+              ErrorMessage(
+                  message: 'The user @${_controller.text} does not exist'),
             if (state.user != null) ...[
               UserProfile(user: state.user!),
               const SizedBox(height: 20),

@@ -1,29 +1,42 @@
-import 'package:app_bjumper_bak/src/presentation/features/home/controller/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SearchField extends ConsumerWidget {
   final TextEditingController controller;
-  final VoidCallback onSearch;
 
   const SearchField({
     required this.controller,
-    required this.onSearch,
     super.key,
   });
 
   @override
   Widget build(BuildContext context, ref) {
-    final isSearchMode = ref.read(homeViewModelProvider).isSearchMode;
     return TextField(
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: '@Username',
-        suffixIcon: IconButton(
-          icon: Icon(isSearchMode ? Icons.search : Icons.close),
-          onPressed: onSearch,
-        ),
-      ),
-    );
+        controller: controller,
+        keyboardType: TextInputType.text,
+        decoration: InputDecoration(
+          labelText: '@Username',
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(
+                12.0), // Ajusta el valor para mayor o menor curvatura
+            borderSide: const BorderSide(
+              color: Colors.grey, // Cambia el color del borde si es necesario
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.0),
+            borderSide: const BorderSide(
+              color: Colors.blue, // Color del borde al hacer foco
+              width: 2.0,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.0),
+            borderSide: const BorderSide(
+              color: Colors.grey, // Color del borde por defecto
+              width: 1.0,
+            ),
+          ),
+        ));
   }
 }
