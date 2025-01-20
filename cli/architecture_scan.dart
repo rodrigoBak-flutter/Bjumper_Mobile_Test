@@ -13,9 +13,9 @@ const indeterminado = '\x1b[41m';
 const reset = '\x1b[0m';
 
 const warning = '$yellow⚠️$reset';
-const domain = '/domain/';
-const data = '/data/';
-const presentation = '/presentation/';
+const domain = 'src/domain/';
+const data = 'src/data/';
+const presentation = 'src/presentation/';
 const packageflutter = 'package:flutter/';
 final configuration = [
   domain,
@@ -26,7 +26,7 @@ final configuration = [
 int incidencias = 0;
 void main() async {
   final current = path.current;
-  const lib = '/lib/src/';
+  const lib = 'lib/src/';
   final proyect = '$current$lib';
 
   final dir = Directory(proyect);
