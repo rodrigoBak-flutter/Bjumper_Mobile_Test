@@ -2,7 +2,7 @@ import 'package:app_bjumper_bak/src/domain/entities/repositoryDTO.dart';
 import 'package:app_bjumper_bak/src/domain/entities/userDTO.dart';
 import 'package:app_bjumper_bak/src/presentation/features/home/widget/repository_list_view.dart';
 import 'package:app_bjumper_bak/src/presentation/features/home/widget/user_profile.dart';
-import 'package:app_bjumper_bak/src/presentation/shared/svg/bjumper_logo.dart';
+import 'package:app_bjumper_bak/src/presentation/shared/svg/bjumper_svg.dart';
 import 'package:app_bjumper_bak/src/presentation/style/bjumper_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +38,7 @@ class HomeWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const BjumperLogo(),
+                const BjumperSvg(svgBjumperName: 'assets/icons/bjumperLogo.svg',),
                 IconButton(
                     onPressed: onPressed,
                     icon: const Icon(

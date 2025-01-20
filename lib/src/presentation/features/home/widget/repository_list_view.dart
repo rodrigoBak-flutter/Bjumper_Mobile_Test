@@ -1,8 +1,8 @@
 import 'package:app_bjumper_bak/src/core/extensions/context.dart';
 import 'package:app_bjumper_bak/src/domain/entities/repositoryDTO.dart';
+import 'package:app_bjumper_bak/src/presentation/shared/svg/bjumper_svg.dart';
 import 'package:app_bjumper_bak/src/presentation/style/bjumper_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class RepositoryListView extends StatelessWidget {
   final List<RepositoryDTO> repositories;
@@ -15,7 +15,7 @@ class RepositoryListView extends StatelessWidget {
       return Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Text('¡Ups! Nada por aquí.',
+          child: Text('¡Ups! Nothing to se here',
               style: context.titleLarge.copyWith(color: BjumperColors.primary)),
         ),
       );
@@ -44,27 +44,20 @@ class RepositoryListView extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: SvgPicture.asset(
-                        'assets/icons/fork.svg',
-                        // ignore: deprecated_member_use
-                        color: BjumperColors.primary,
-                      ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child:
+                          BjumperSvg(svgBjumperName: 'assets/icons/fork.svg'),
                     ),
                     Text(
                       repo.forks.toString(),
                       style: context.bodyMedium
                           .copyWith(color: BjumperColors.primary),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: SvgPicture.asset(
-                        'assets/icons/star.svg',
-                        // ignore: deprecated_member_use
-                        color: BjumperColors.primary,
-                      ),
-                    ),
+                    const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: BjumperSvg(
+                            svgBjumperName: 'assets/icons/star.svg')),
                     Text(
                       repo.stars.toString(),
                       style: context.bodyMedium
