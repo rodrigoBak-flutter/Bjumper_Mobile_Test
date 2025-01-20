@@ -1,3 +1,4 @@
+import 'package:app_bjumper_bak/src/core/error/exceptions.dart';
 import 'package:app_bjumper_bak/src/core/mixins/network_mixin.dart';
 import 'package:app_bjumper_bak/src/data/models/repository_model.dart';
 import 'package:app_bjumper_bak/src/data/models/users_model.dart';
@@ -10,10 +11,13 @@ class GitHubRemoteDataSource with NetworkMixin {
       if (response.statusCode == 200) {
         return UserModel.fromJson(jsonDecode(response.body));
       } else {
-        throw Exception('Error ${response.statusCode}: Could not get user.');
+        throw ApiException(
+          'Error ${response.statusCode}: Could not get user.',
+          responseData: {'status': response.statusCode, 'message': 'User not found'},
+        );
       }
     } catch (e) {
-      throw Exception('Error searching user: $e');
+      throw ApiException('Error searching user: $e');
     }
   }
 
@@ -24,10 +28,13 @@ class GitHubRemoteDataSource with NetworkMixin {
         final List<dynamic> reposJson = jsonDecode(response.body);
         return reposJson.map((json) => RepositoryModel.fromJson(json)).toList();
       } else {
-        throw Exception('Error ${response.statusCode}: Could not get repositories.');
+        throw ApiException(
+          'Error ${response.statusCode}: Could not get repositories.',
+          responseData: {'status': response.statusCode, 'message': 'Repositories not found'},
+        );
       }
     } catch (e) {
-      throw Exception('Error searching repositories: $e');
+      throw ApiException('Error searching repositories: $e');
     }
   }
 }

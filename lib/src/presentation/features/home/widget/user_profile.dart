@@ -41,12 +41,14 @@ class UserProfile extends StatelessWidget {
               ),
             ],
           ),
-          subtitle: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: user.bio == ''
-                ? Text('BIO: ${user.bio}')
-                : const Text('BIO: No bio available'),
-          ),
+          subtitle: user.bio == ''
+              ? Text(
+                  'BIO: ${user.bio}',
+                  style:
+                      context.bodyMedium.copyWith(color: BjumperColors.primary),
+                )
+              :  Text('BIO: No bio available', style:
+                      context.bodyMedium.copyWith(color: BjumperColors.primary),),
         ),
       ],
     );

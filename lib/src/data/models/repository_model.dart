@@ -1,8 +1,14 @@
 import 'package:app_bjumper_bak/src/domain/entities/repositoryDTO.dart';
 
 class RepositoryModel extends RepositoryDTO {
+  @override
+  // ignore: overridden_fields
   final String name;
+  @override
+  // ignore: overridden_fields
   final int stars;
+  @override
+  // ignore: overridden_fields
   final int forks;
 
   RepositoryModel({

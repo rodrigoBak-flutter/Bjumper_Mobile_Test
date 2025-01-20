@@ -4,10 +4,10 @@ import 'package:app_bjumper_bak/src/presentation/style/bjumper_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class RepositoriesList extends StatelessWidget {
+class RepositoryListView extends StatelessWidget {
   final List<RepositoryDTO> repositories;
 
-  const RepositoriesList({super.key, required this.repositories});
+  const RepositoryListView({super.key, required this.repositories});
 
   @override
   Widget build(BuildContext context) {
