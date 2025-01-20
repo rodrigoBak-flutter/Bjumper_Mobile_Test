@@ -1,3 +1,4 @@
+// ignore: file_names
 class UserDTO {
   final String avatarUrl;
   final String username;
