@@ -27,7 +27,6 @@ extension BuildContextExtensionSize on BuildContext {
   double get availableHeight {
     MediaQueryData media = MediaQuery.of(this);
     double paddingTop = media.padding.top;
-    //   double insets = media.viewInsets.top;
     return height - (paddingTop + kToolbarHeight);
   }
 }

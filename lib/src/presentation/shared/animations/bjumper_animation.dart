@@ -18,12 +18,15 @@ class BjumperAnimation extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return PumpAnimation(
-      duration: duration,
-      startSize: startSize,
-      endSize: endSize,
-      curve: curve,
-      asset: asset,
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: PumpAnimation(
+        duration: duration,
+        startSize: startSize,
+        endSize: endSize,
+        curve: curve,
+        asset: asset,
+      ),
     );
   }
 }
