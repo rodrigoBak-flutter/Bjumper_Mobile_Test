@@ -1,4 +1,5 @@
 import 'package:app_bjumper_bak/src/presentation/features/home/widget/repository_list_view.dart';
+import 'package:app_bjumper_bak/src/presentation/shared/animations/bjumper_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,8 +30,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void _searchUser() {
     final text = _controller.text;
     ref.read(homeViewModelProvider.notifier).clearSearch();
-    if (text.isNotEmpty)
+    if (text.isNotEmpty) {
       ref.read(homeViewModelProvider.notifier).searchUser(text);
+    }
   }
 
   @override
@@ -43,7 +45,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         backgroundColor: BjumperColors.neutral010,
       ),
       body: state.isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const Center(child: BjumperAnimation())
           : Padding(
               padding: const EdgeInsets.all(8.0),
               child: state.user == null

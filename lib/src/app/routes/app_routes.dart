@@ -4,17 +4,13 @@ import 'package:app_bjumper_bak/src/presentation/features/home/home_screen.dart'
 
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    // final args = settings.arguments;
     final name = settings.name;
 
     switch (name) {
       case SplashScreen.routeName:
         return _getRoute(page: const SplashScreen());
-      case SplashScreen.routeName:
-        return _getRoute(page: HomeScreen());
-
       default:
-        return _getRoute(page: HomeScreen());
+        return _getRoute(page: const HomeScreen());
     }
   }
 

@@ -38,6 +38,7 @@ class RepositoryListView extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: SvgPicture.asset(
                         'assets/icons/fork.svg',
+                        // ignore: deprecated_member_use
                         color: BjumperColors.primary,
                       ),
                     ),
@@ -50,6 +51,7 @@ class RepositoryListView extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: SvgPicture.asset(
                         'assets/icons/star.svg',
+                        // ignore: deprecated_member_use
                         color: BjumperColors.primary,
                       ),
                     ),
