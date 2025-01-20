@@ -1,9 +1,9 @@
-import 'package:app_bjumper_bak/src/core/extensions/context.dart';
-import 'package:app_bjumper_bak/src/presentation/features/home/home_screen.dart';
-import 'package:app_bjumper_bak/src/presentation/style/bjumper_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:app_bjumper_bak/src/core/extensions/context.dart';
+import 'package:app_bjumper_bak/src/presentation/features/home/home_screen.dart';
+import 'package:app_bjumper_bak/src/presentation/shared/svg/bjumper_logo.dart';
+import 'package:app_bjumper_bak/src/presentation/style/bjumper_colors.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -23,21 +23,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: BjumperColors.splashScreen,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: SvgPicture.asset(
-              'assets/icons/bjumperLogo.svg',
-              fit: BoxFit.cover,
-              alignment: AlignmentDirectional.center,
-            ),
-          ),
-        ],
-      ),
+      body: Center(child: BjumperLogo()),
     );
   }
 

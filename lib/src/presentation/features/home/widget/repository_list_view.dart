@@ -11,6 +11,15 @@ class RepositoryListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (repositories.isEmpty) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text('¡Ups! Nada por aquí.',
+              style: context.titleLarge.copyWith(color: BjumperColors.primary)),
+        ),
+      );
+    }
     return Expanded(
       child: ListView.separated(
         shrinkWrap: true,
@@ -21,6 +30,7 @@ class RepositoryListView extends StatelessWidget {
         itemCount: repositories.length,
         itemBuilder: (context, index) {
           final repo = repositories[index];
+
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Row(
