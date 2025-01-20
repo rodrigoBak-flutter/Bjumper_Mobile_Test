@@ -20,14 +20,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   final TextEditingController _controller = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   void dispose() {
+    _controller
+        .dispose(); //libera los recursos del controllador, mejora el rendimiento
     super.dispose();
-    _controller.dispose();
   }
 
   void _searchUser() {
@@ -50,57 +46,80 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ? const Center(child: CircularProgressIndicator())
           : Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SvgPicture.asset(
-                    'assets/icons/bjumperLogo.svg',
-                    fit: BoxFit.cover,
-                    alignment: AlignmentDirectional.center,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30, bottom: 5),
-                    child: SearchField(
-                      controller: _controller,
-                      onSearch: _searchUser,
+              child: state.user == null
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/bjumperLogo.svg',
+                          fit: BoxFit.cover,
+                          alignment: AlignmentDirectional.center,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 30, bottom: 5),
+                          child: SearchField(
+                            controller: _controller,
+                            onSearch: _searchUser,
+                          ),
+                        ),
+                        if (state.errorMessage != null)
+                          ErrorMessage(
+                              message:
+                                  'The user @${_controller.text} does not exist'),
+                      ],
+                    )
+                  : DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: BjumperColors.neutral010,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: BjumperColors.primary),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.2),
+                            blurRadius: 4,
+                            offset: const Offset(2, 2),
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/icons/bjumperLogo.svg',
+                                  fit: BoxFit.cover,
+                                  alignment: AlignmentDirectional.center,
+                                ),
+                                IconButton(
+                                    onPressed: () {
+                                      _controller.clear();
+                                      ref
+                                          .read(homeViewModelProvider.notifier)
+                                          .clearSearch();
+                                    },
+                                    icon: const Icon(
+                                      Icons.close,
+                                      color: BjumperColors.primary,
+                                      size: 40,
+                                    )),
+                              ],
+                            ),
+                            const Divider(
+                              color: BjumperColors.primary,
+                            ),
+                            UserProfile(user: state.user!),
+                            const SizedBox(height: 10),
+                            if (state.repositories != null)
+                              RepositoryListView(
+                                  repositories: state.repositories!),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                  if (state.errorMessage != null)
-                    ErrorMessage(
-                        message:
-                            'The user @${_controller.text} does not exist ${state.errorMessage}' ),
-                  if (state.user != null) ...[
-                    UserProfile(user: state.user!),
-                    const SizedBox(height: 10),
-                    if (state.repositories != null)
-                      RepositoryListView(repositories: state.repositories!),
-                  ],
-                ],
-              ),
             ),
     );
   }
 }
-
-/*
-
-visible: state.user == null && state.repositories == null,
-
-IconButton(
-                onPressed: () => ref
-                    .read(homeViewModelProvider.notifier)
-                    .clearSearch(),
-                icon: const Icon(
-                  Icons.close,
-                  color: BjumperColors.primary,
-                  size: 40,
-                )),
-
-                Visibility(
-              visible: state.user != null && state.repositories != null,
-              child: const Divider(
-                thickness: 2,
-                color: BjumperColors.primary,
-              ),
-            ),
- */
