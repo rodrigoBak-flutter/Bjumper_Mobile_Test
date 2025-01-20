@@ -1,10 +1,10 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:app_bjumper_bak/src/core/error/exceptions.dart';
 import 'package:app_bjumper_bak/src/app/di/di.dart';
 import 'package:app_bjumper_bak/src/domain/entities/repositoryDTO.dart';
 import 'package:app_bjumper_bak/src/domain/entities/userDTO.dart';
 import 'package:app_bjumper_bak/src/domain/usescases/get_user_and_repos.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeState {
   final UserDTO? user;
