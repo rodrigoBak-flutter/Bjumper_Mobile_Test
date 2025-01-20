@@ -79,13 +79,7 @@ class HomeViewModel extends StateNotifier<HomeState> {
   }
 
   void clearSearch() {
-    // Limpiar el estado cuando se quiera borrar la búsqueda
-    state = state.copyWith(
-      isLoading: false,
-      errorMessage: null,
-      user: null,
-      repositories: null,
-    );
+    state = HomeState();
   }
 }
 
