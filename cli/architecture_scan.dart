@@ -26,24 +26,28 @@ final configuration = [
 int incidencias = 0;
 void main() async {
   final current = path.current;
-  const lib = 'lib/src/';
-  final proyect = '$current$lib';
+  const libPath = 'lib/src/';
+  final proyectPath = '$current/$libPath';
 
-  final dir = Directory(proyect);
-  final files = dir.listSync(recursive: true);
+  final dir = Directory(proyectPath);
+  if (!dir.existsSync()) {
+    print('$red[Error] No se encontró la ruta $proyectPath$reset');
+    return;
+  }
+
+  final files = dir.listSync(recursive: true).whereType<File>();
 
   for (final file in files) {
-    final isFile = file.statSync().type == FileSystemEntityType.file;
-    if (!isFile) {
-      continue;
-    }
-
     checkDataLayer(file);
     checkDomainLayer(file);
     checkPresentationLayer(file);
   }
 
-  if (incidencias > 0) {}
+  if (incidencias > 0) {
+    print('$red[$incidencias] incidencias detectadas$reset');
+  } else {
+    print('$green No se encontraron incidencias. Todo está correcto!$reset');
+  }
 }
 
 void _scanProyectFolder(
